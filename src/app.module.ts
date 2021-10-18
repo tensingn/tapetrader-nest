@@ -6,9 +6,9 @@ import { MerchModule } from './merch/merch.module'
 import { SequelizeModule } from '@nestjs/sequelize';
 import { Merch } from './merch/merch.model';
 
-
 @Module({
-  imports: [ ConfigModule.forRoot(), MerchModule,
+  imports: [ ConfigModule.forRoot(), 
+    MerchModule,
     SequelizeModule.forRoot({
       dialect: 'mysql',
       host: process.env.DB_HOST,

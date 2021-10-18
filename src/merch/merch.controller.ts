@@ -12,10 +12,10 @@ export class MerchController {
         return this.merchService.findAll();
     }
 
-    // @Get(':merchId')
-    // findOne(@Param('merchId') merchId: string): Merch {
-    //     return this.merchService.findOne(parseInt(merchId));
-    // }
+    @Get(':merchId')
+    findOne(@Param('merchId') merchId: string): Promise<Merch> {
+        return this.merchService.findOne(parseInt(merchId));
+    }
 
     @Post()
     create(@Body() createMerchDto: CreateMerchDto): string {

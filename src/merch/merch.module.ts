@@ -6,7 +6,6 @@ import { MerchService } from './merch.service';
 import { Merch } from './merch.model';
 
 
-
 @Module({
   imports: [SequelizeModule.forFeature([Merch])],
   controllers: [MerchController],

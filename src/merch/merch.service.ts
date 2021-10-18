@@ -12,4 +12,12 @@ export class MerchService {
     async findAll(): Promise<Merch[]> {
         return this.merchModel.findAll();
     }
+
+    async findOne(merchId: number): Promise<Merch> {
+        return this.merchModel.findOne({
+            where: {
+                merchId: merchId
+            }
+        });
+    }
 }
