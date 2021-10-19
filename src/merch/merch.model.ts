@@ -6,6 +6,7 @@ export class Merch extends Model {
   @PrimaryKey
   @Column({
       type: DataTypes.INTEGER,
+      autoIncrement: true,
       allowNull: false,
   })
   public merchId!: number;

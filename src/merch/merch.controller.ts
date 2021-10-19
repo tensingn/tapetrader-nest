@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Put, Delete, Body, Param } from '@nestjs/common';
+import { Controller, Get, Post, Put, Delete, Body, Param, UsePipes, ValidationPipe } from '@nestjs/common';
 import { CreateMerchDto } from './dto/create-merch.dto';
 import { MerchService } from './merch.service';
 import { Merch } from './merch.model';
@@ -14,17 +14,18 @@ export class MerchController {
 
     @Get(':merchId')
     findOne(@Param('merchId') merchId: string): Promise<Merch> {
-        return this.merchService.findOne(parseInt(merchId));
+        return this.merchService.findOne(parseInt(merchId));;
     }
 
     @Post()
-    create(@Body() createMerchDto: CreateMerchDto): string {
-        return `Desc: ${createMerchDto.description}`;
+    @UsePipes(ValidationPipe)
+    create(@Body() createMerchDto: CreateMerchDto): Promise<Merch> {
+        return this.merchService.create(createMerchDto);
     }
 
     @Delete(':merchId')
-    delete(@Param('merchId') merchId: string): string {
-        return `${merchId}`;
+    delete(@Param('merchId') merchId: string): Promise<number> {
+        return this.merchService.delete(parseInt(merchId));
     }
 
     @Put(':merchId')
