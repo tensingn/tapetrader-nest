@@ -36,7 +36,7 @@ export class MerchController {
 
 	@Delete(':merchId')
 	delete(@Param('merchId') merchId: string): Promise<number> {
-		return this.merchService.delete(parseInt(merchId));
+		return this.merchService.delete(+merchId);
 	}
 
 	@Put(':merchId')
@@ -45,6 +45,6 @@ export class MerchController {
 		@Body() updateMerchDto: CreateMerchDto,
 		@Param('merchId') merchId: string,
 	): Promise<[number, Merch[]]> {
-		return this.merchService.update(parseInt(merchId), updateMerchDto);
+		return this.merchService.update(+merchId, updateMerchDto);
 	}
 }

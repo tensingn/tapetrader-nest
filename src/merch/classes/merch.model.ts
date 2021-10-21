@@ -1,8 +1,7 @@
 import { Column, Model, Table, PrimaryKey } from 'sequelize-typescript';
 import { DataTypes } from 'sequelize';
-import { Col } from 'sequelize/types/lib/utils';
 
-@Table({ tableName: 'Merch' })
+@Table({ tableName: 'Merch', paranoid: true })
 export class Merch extends Model {
 	@PrimaryKey
 	@Column({

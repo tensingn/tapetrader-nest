@@ -1,19 +1,16 @@
 import { Column, Model, Table, PrimaryKey } from 'sequelize-typescript';
 import { DataTypes } from 'sequelize';
 
-@Table({ tableName: 'Users', paranoid: true })
-export class User extends Model {
+@Table({ tableName: 'MerchTypes' })
+export class MerchType extends Model {
 	@PrimaryKey
 	@Column({
 		type: DataTypes.INTEGER,
 		autoIncrement: true,
 		allowNull: false,
 	})
-	public userId!: number;
+	public typeId!: number;
 
 	@Column
-	username: string;
-
-	@Column
-	email: string;
+	name: string;
 }

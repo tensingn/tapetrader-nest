@@ -9,7 +9,7 @@ export class MerchService {
 	constructor(@InjectModel(Merch) private merchModel: typeof Merch) {}
 
 	async findAll(): Promise<Merch[]> {
-		return this.merchModel.findAll();
+		return await this.merchModel.findAll();
 	}
 
 	async findOne(merchId: number): Promise<Merch> {
