@@ -15,11 +15,17 @@ export class Merch extends Model {
 	description: string;
 
 	@Column
-	merchType: string;
+	typeId: number;
 
 	@Column
-	bandId: number;
+	artistId: number;
 
 	@Column
 	userId: number;
+
+	@Column({
+		type: DataTypes.BOOLEAN,
+		defaultValue: false,
+	})
+	forSaleOrTrade: boolean;
 }

@@ -5,10 +5,12 @@ export class CreateMerchDto {
 	readonly description: string;
 
 	@IsNotEmpty()
-	readonly merchType: string;
+	readonly typeId: number;
 
 	@IsNotEmpty()
 	readonly userId: number;
 
-	readonly band: number;
+	readonly forSaleOrTrade: boolean;
+
+	readonly artistId: number;
 }

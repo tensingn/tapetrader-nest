@@ -23,9 +23,9 @@ export class MerchController {
 		return this.merchService.findAll();
 	}
 
-	@Get(':merchId')
-	findOne(@Param('merchId') merchId: string): Promise<Merch> {
-		return this.merchService.findOne(parseInt(merchId));
+	@Get(':id')
+	findOne(@Param('id') id: string): Promise<Merch> {
+		return this.merchService.findOne(+id);
 	}
 
 	@Post()
@@ -34,17 +34,17 @@ export class MerchController {
 		return this.merchService.create(createMerchDto);
 	}
 
-	@Delete(':merchId')
-	delete(@Param('merchId') merchId: string): Promise<number> {
-		return this.merchService.delete(+merchId);
+	@Delete(':id')
+	delete(@Param('id') id: string): Promise<number> {
+		return this.merchService.delete(+id);
 	}
 
-	@Put(':merchId')
+	@Put(':id')
 	@UsePipes(ValidationPipe)
 	update(
 		@Body() updateMerchDto: CreateMerchDto,
-		@Param('merchId') merchId: string,
-	): Promise<[number, Merch[]]> {
-		return this.merchService.update(+merchId, updateMerchDto);
+		@Param('id') id: string,
+	): Promise<Merch> {
+		return this.merchService.update(+id, updateMerchDto);
 	}
 }

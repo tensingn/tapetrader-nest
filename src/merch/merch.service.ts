@@ -12,8 +12,8 @@ export class MerchService {
 		return await this.merchModel.findAll();
 	}
 
-	async findOne(merchId: number): Promise<Merch> {
-		const merch = await this.merchModel.findByPk(merchId);
+	async findOne(id: number): Promise<Merch> {
+		const merch = await this.merchModel.findByPk(id);
 
 		// check that merch was found
 		if (!merch) {
@@ -28,11 +28,11 @@ export class MerchService {
 		return merch;
 	}
 
-	async delete(merchId: number): Promise<number> {
+	async delete(id: number): Promise<number> {
 		// delete the row
 		const deleted = await this.merchModel.destroy({
 			where: {
-				merchId: merchId,
+				merchId: id,
 			},
 		});
 
@@ -44,11 +44,11 @@ export class MerchService {
 		return deleted;
 	}
 
-	async update(merchId: number, merchData: CreateMerchDto) {
+	async update(id: number, merchData: CreateMerchDto): Promise<Merch> {
 		// update row
 		const merch = await this.merchModel.update(merchData, {
 			where: {
-				merchId: merchId,
+				merchId: id,
 			},
 		});
 
@@ -57,6 +57,6 @@ export class MerchService {
 			throw new NotFoundException();
 		}
 
-		return merch;
+		return await this.merchModel.findByPk(id);
 	}
 }
