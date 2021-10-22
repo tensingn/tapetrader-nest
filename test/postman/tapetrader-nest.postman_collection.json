@@ -1,0 +1,762 @@
+{
+	"info": {
+		"_postman_id": "5e874ce3-51bb-438c-b04a-38a83ac7c8d7",
+		"name": "tapetrader-nest",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Create User",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const res = pm.response.json();",
+									"const userData = JSON.parse(request.data);",
+									"",
+									"pm.environment.set(\"userData\", userData);",
+									"pm.environment.set(\"userId\", res.userId)",
+									"",
+									"pm.test(\"201 status code\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"",
+									"pm.test(\"content is valid\", function () {",
+									"    for(const prop in userData) {",
+									"        pm.expect(userData[prop]).to.eq(res[prop]);",
+									"    }",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"{{$randomFullName}}\",\n    \"email\": \"{{$randomEmail}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/user",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Users",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"200 status code\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/user",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get User by Id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const res = pm.response.json();",
+									"const userData = pm.environment.get('userData');",
+									"",
+									"pm.test(\"200 status code\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"content is valid\", function () {",
+									"    for(const prop in userData) {",
+									"        pm.expect(userData[prop]).to.eq(res[prop]);",
+									"    }",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/user/{{userId}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"user",
+								"{{userId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const res = pm.response.json();",
+									"const userData = JSON.parse(request.data);",
+									"",
+									"pm.environment.set('userData', userData);",
+									"",
+									"pm.test(\"200 status code\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"content is valid\", function () {",
+									"    for(const prop in userData) {",
+									"        pm.expect(userData[prop]).to.eq(res[prop]);",
+									"    }",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"{{$randomFullName}}\",\n    \"email\": \"{{$randomEmail}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/user/{{userId}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"user",
+								"{{userId}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Merch Type",
+			"item": [
+				{
+					"name": "Create Merch Type",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const res = pm.response.json();",
+									"const merchTypeData = JSON.parse(request.data);",
+									"",
+									"pm.environment.set(\"merchTypeData\", merchTypeData);",
+									"pm.environment.set(\"merchTypeId\", res.typeId)",
+									"",
+									"pm.test(\"201 status code\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"",
+									"pm.test(\"content is valid\", function () {",
+									"    for(const prop in merchTypeData) {",
+									"        pm.expect(merchTypeData[prop]).to.eq(res[prop]);",
+									"    }",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"{{$randomLoremWord}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/merch-type",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"merch-type"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Merch Types",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"200 status code\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/merch-type",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"merch-type"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Merch Type by Id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const res = pm.response.json();",
+									"const merchTypeData = pm.environment.get('merchTypeData');",
+									"",
+									"pm.test(\"200 status code\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"content is valid\", function () {",
+									"    for(const prop in merchTypeData) {",
+									"        pm.expect(merchTypeData[prop]).to.eq(res[prop]);",
+									"    }",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/merch-type/{{merchTypeId}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"merch-type",
+								"{{merchTypeId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Merch Type",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const res = pm.response.json();",
+									"const merchTypeData = JSON.parse(request.data);",
+									"",
+									"pm.environment.set('merchTypeData', merchTypeData);",
+									"",
+									"pm.test(\"200 status code\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"content is valid\", function () {",
+									"    for(const prop in merchTypeData) {",
+									"        pm.expect(merchTypeData[prop]).to.eq(res[prop]);",
+									"    }",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"{{$randomLoremWord}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/merch-type/{{merchTypeId}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"merch-type",
+								"{{merchTypeId}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Merch",
+			"item": [
+				{
+					"name": "Create Merch Item",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const res = pm.response.json();",
+									"const merchData = JSON.parse(request.data);",
+									"",
+									"pm.environment.set('merchId', res[\"merchId\"]);",
+									"pm.environment.set('merchData', merchData);",
+									"",
+									"pm.test(\"201 status code\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"",
+									"pm.test(\"content is valid\", function () {",
+									"    for(const prop in merchData) {",
+									"        pm.expect(merchData[prop]).to.eq(res[prop]);",
+									"    }",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"description\": \"Metallica CD\",\n    \"typeId\": {{merchTypeId}},\n    \"artistId\": 2,\n    \"userId\": {{userId}},\n    \"forSaleOrTrade\": true\n\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/merch",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"merch"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Merch Items",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"200 status code\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/merch",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"merch"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Merch Item by Id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const res = pm.response.json();",
+									"const merchData = pm.environment.get('merchData');",
+									"",
+									"pm.test(\"200 status code\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"content is valid\", function () {",
+									"    for(const prop in merchData) {",
+									"        pm.expect(merchData[prop]).to.eq(res[prop]);",
+									"    }",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/merch/{{merchId}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"merch",
+								"{{merchId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Merch Item",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const res = pm.response.json();",
+									"const merchData = JSON.parse(request.data);",
+									"",
+									"pm.environment.set('merchData', merchData);",
+									"",
+									"pm.test(\"200 status code\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"content is valid\", function () {",
+									"    for(const prop in merchData) {",
+									"        pm.expect(merchData[prop]).to.eq(res[prop]);",
+									"    }",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"description\": \"ACDC Poster\",\n    \"typeId\": 2,\n    \"artistId\": 3,\n    \"userId\": {{userId}},\n    \"forSaleOrTrade\": false\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/merch/{{merchId}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"merch",
+								"{{merchId}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Discogs",
+			"item": [
+				{
+					"name": "Search for an Artist",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Discogs key={{discogs_key}}, secret={{discogs_secret}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{discogs_url}}/database/search?q=Nirvana&type=artist&per_page=5",
+							"host": [
+								"{{discogs_url}}"
+							],
+							"path": [
+								"database",
+								"search"
+							],
+							"query": [
+								{
+									"key": "q",
+									"value": "Nirvana"
+								},
+								{
+									"key": "type",
+									"value": "artist"
+								},
+								{
+									"key": "per_page",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Artist by Id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Discogs key={{discogs_key}}, secret={{discogs_secret}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{discogs_url}}/artists/125246",
+							"host": [
+								"{{discogs_url}}"
+							],
+							"path": [
+								"artists",
+								"125246"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Cleanup",
+			"item": [
+				{
+					"name": "Delete Merch Item",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"200 status code\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"content is valid\", function () {",
+									"    const res = pm.response.json();",
+									"    pm.expect(res).to.eq(1);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/merch/{{merchId}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"merch",
+								"{{merchId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Merch Type",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"200 status code\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"content is valid\", function () {",
+									"    const res = pm.response.json();",
+									"    pm.expect(res).to.eq(1);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/merch-type/{{merchTypeId}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"merch-type",
+								"{{merchTypeId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"200 status code\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"content is valid\", function () {",
+									"    const res = pm.response.json();",
+									"    pm.expect(res).to.eq(1);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/user/{{userId}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"user",
+								"{{userId}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
